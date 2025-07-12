@@ -12,6 +12,18 @@ const FeaturesSection = styled.section`
   position: relative;
   overflow: hidden;
   
+  @media (max-width: 968px) {
+    padding: 120px 0;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 80px 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 60px 0;
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -38,18 +50,38 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   
+  @media (max-width: 968px) {
+    padding: 0 30px;
+  }
+  
   @media (max-width: 768px) {
     padding: 0 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 16px;
   }
 `;
 
 const SectionHeader = styled.div`
   text-align: center;
   margin-bottom: 120px;
+  
+  @media (max-width: 968px) {
+    margin-bottom: 80px;
+  }
+  
+  @media (max-width: 768px) {
+    margin-bottom: 60px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 40px;
+  }
 `;
 
 const SectionTitle = styled(motion.h2)`
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.5rem, 8vw, 6rem);
   font-weight: 200;
   margin-bottom: 30px;
   letter-spacing: -0.03em;
@@ -58,6 +90,17 @@ const SectionTitle = styled(motion.h2)`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(2rem, 10vw, 4rem);
+    margin-bottom: 25px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: clamp(1.8rem, 12vw, 3rem);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
   
   &::after {
     content: '';
@@ -69,6 +112,17 @@ const SectionTitle = styled(motion.h2)`
     height: 3px;
     background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
     border-radius: 2px;
+    
+    @media (max-width: 768px) {
+      width: 80px;
+      height: 2px;
+      bottom: -12px;
+    }
+    
+    @media (max-width: 480px) {
+      width: 60px;
+      bottom: -10px;
+    }
   }
 `;
 
@@ -78,7 +132,20 @@ const SectionSubtitle = styled(motion.p)`
   color: rgba(255, 255, 255, 0.6);
   max-width: 500px;
   margin: 0 auto;
-  line-height: 1.4;
+  line-height: 1.6;
+  
+  @media (max-width: 768px) {
+    font-size: 18px;
+    max-width: 100%;
+    padding: 0 20px;
+    line-height: 1.7;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 16px;
+    padding: 0 10px;
+    line-height: 1.8;
+  }
 `;
 
 const FeatureGrid = styled.div`
@@ -86,6 +153,8 @@ const FeatureGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
   
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
@@ -93,6 +162,12 @@ const FeatureGrid = styled.div`
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 1px;
+    border-radius: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    border-radius: 12px;
   }
 `;
 
@@ -107,6 +182,21 @@ const FeatureCard = styled(motion.div)`
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
   backdrop-filter: blur(20px);
+  
+  @media (max-width: 968px) {
+    padding: 50px 35px;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 40px 30px;
+    border-right: none;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.15);
+    text-align: center;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 30px 20px;
+  }
   
   &::before {
     content: '';
