@@ -16,15 +16,20 @@ const HeroSection = styled.section`
     linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 30, 0.98) 100%);
   overflow: hidden;
   padding: 100px 20px 40px 20px;
+  box-sizing: border-box;
+  width: 100%;
   
   @media (max-width: 768px) {
     min-height: 100svh;
     padding: 80px 16px 30px 16px;
+    overflow-x: hidden;
   }
   
   @media (max-width: 480px) {
     min-height: 100svh;
     padding: 70px 12px 20px 12px;
+    overflow-x: hidden;
+    width: 100vw;
   }
   
   &::before {
@@ -70,13 +75,19 @@ const HeroContainer = styled.div`
   @media (max-width: 768px) {
     padding: 0 20px;
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 40px;
     text-align: center;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
   }
   
   @media (max-width: 480px) {
     padding: 0 16px;
-    gap: 40px;
+    gap: 30px;
+    max-width: 100%;
+    width: calc(100% - 32px);
+    margin: 0 auto;
   }
 `;
 
@@ -84,6 +95,8 @@ const HeroContent = styled.div`
   text-align: left;
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 100%;
   
   &::before {
     content: '';
@@ -111,10 +124,14 @@ const HeroContent = styled.div`
   @media (max-width: 768px) {
     text-align: center;
     max-width: 100%;
+    width: 100%;
   }
   
   @media (max-width: 480px) {
     text-align: center;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
   }
 `;
 
@@ -208,19 +225,24 @@ const HeroTitle = styled(motion.h1)`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
+  max-width: 100%;
+  overflow: hidden;
   
   @media (max-width: 768px) {
-    font-size: clamp(2.5rem, 12vw, 6rem);
+    font-size: clamp(2.5rem, 12vw, 5rem);
     line-height: 0.95;
     margin-bottom: 25px;
     text-align: center;
+    max-width: 100%;
   }
   
   @media (max-width: 480px) {
-    font-size: clamp(2rem, 15vw, 4rem);
+    font-size: clamp(1.8rem, 12vw, 3.5rem);
     line-height: 1;
     margin-bottom: 20px;
     letter-spacing: -0.03em;
+    max-width: 100%;
+    word-break: keep-all;
   }
 `;
 
@@ -235,16 +257,19 @@ const ProductName = styled(motion.span)`
   letter-spacing: -0.03em;
   margin-top: 15px;
   position: relative;
+  max-width: 100%;
   
   @media (max-width: 768px) {
-    font-size: clamp(1.8rem, 10vw, 4rem);
+    font-size: clamp(1.8rem, 10vw, 3.5rem);
     margin-top: 12px;
+    max-width: 100%;
   }
   
   @media (max-width: 480px) {
-    font-size: clamp(1.5rem, 12vw, 3rem);
+    font-size: clamp(1.4rem, 10vw, 2.5rem);
     margin-top: 10px;
     letter-spacing: -0.02em;
+    max-width: 100%;
   }
   
   &::before {
@@ -272,8 +297,8 @@ const ProductName = styled(motion.span)`
     }
     
     @media (max-width: 480px) {
-      left: -15px;
-      width: calc(100% + 30px);
+      left: -10px;
+      width: calc(100% + 20px);
       height: 2px;
     }
   }
@@ -295,8 +320,8 @@ const ProductName = styled(motion.span)`
     }
     
     @media (max-width: 480px) {
-      left: -8px;
-      width: calc(100% + 16px);
+      left: -5px;
+      width: calc(100% + 10px);
     }
   }
 `;
@@ -322,6 +347,8 @@ const HeroSubtitle = styled(motion.p)`
     margin-bottom: 30px;
     text-align: center;
     line-height: 1.7;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   @media (max-width: 480px) {
@@ -329,6 +356,9 @@ const HeroSubtitle = styled(motion.p)`
     margin-bottom: 25px;
     line-height: 1.8;
     padding: 0 10px;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
   
   &::before {
@@ -340,13 +370,11 @@ const HeroSubtitle = styled(motion.p)`
     height: 2px;
     background: linear-gradient(90deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.6));
     border-radius: 1px;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 19px;
-    margin-bottom: 35px;
-    margin-left: auto;
-    margin-right: auto;
+    
+    @media (max-width: 768px) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 `;
 
