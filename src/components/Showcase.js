@@ -10,6 +10,18 @@ const ShowcaseSection = styled.section`
   background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.03) 0%, transparent 70%);
   overflow: hidden;
   
+  @media (max-width: 968px) {
+    padding: 100px 0;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 80px 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 60px 0;
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -32,6 +44,10 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  
+  @media (max-width: 480px) {
+    padding: 0 16px;
+  }
 `;
 
 const ShowcaseItem = styled.div`
@@ -41,6 +57,23 @@ const ShowcaseItem = styled.div`
   align-items: center;
   margin-bottom: 120px;
   
+  @media (max-width: 1024px) {
+    gap: 60px;
+    margin-bottom: 100px;
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  
   &.reverse {
     .showcase-content {
       order: 2;
@@ -49,15 +82,14 @@ const ShowcaseItem = styled.div`
     .showcase-visual {
       order: 1;
     }
-  }
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
     
-    &.reverse {
+    @media (max-width: 768px) {
       .showcase-content,
+      .showcase-visual {
+        order: initial;
+      }
+    }
+  }
       .showcase-visual {
         order: unset;
       }
