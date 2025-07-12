@@ -1,0 +1,23 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient48" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent48" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+  <polygon points="24,3 42,21 24,39 6,21" fill="url(#gradient48)" stroke="#ffffff" stroke-width="1"/>
+  <polygon points="24,9 36,21 24,33 12,21" fill="url(#accent48)" opacity="0.3"/>
+  <polygon points="24,15 30,21 24,27 18,21" fill="#ffffff" opacity="0.9"/>
+  <circle cx="24" cy="6" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="39" cy="21" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="24" cy="36" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="9" cy="21" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="33" cy="12" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="33" cy="30" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="15" cy="12" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="15" cy="30" r="1.5" fill="#ffffff" opacity="0.6"/>
+</svg>
