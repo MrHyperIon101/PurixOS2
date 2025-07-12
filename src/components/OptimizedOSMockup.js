@@ -61,16 +61,23 @@ const OSContainer = styled(motion.div)`
     height: 340px;
   }
   
+  @media (max-width: 968px) {
+    max-width: 500px;
+    height: 310px;
+  }
+  
   @media (max-width: 768px) {
-    max-width: 480px;
-    height: 300px;
+    max-width: 100%;
+    height: 280px;
     border-radius: 20px;
+    margin: 0 auto;
   }
   
   @media (max-width: 480px) {
     max-width: 100%;
-    height: 250px;
+    height: 220px;
     border-radius: 16px;
+    min-height: 200px;
   }
   
   &::before {
@@ -189,6 +196,18 @@ const Taskbar = styled(motion.div)`
   z-index: 100;
   animation: ${taskbarPulse} 6s ease-in-out infinite;
   
+  @media (max-width: 768px) {
+    height: 42px;
+    padding: 0 15px;
+    border-radius: 0 0 20px 20px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 0 0 16px 16px;
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -225,6 +244,20 @@ const StartButton = styled(motion.button)`
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
+  @media (max-width: 768px) {
+    gap: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 4px;
+    padding: 6px 10px;
+    font-size: 11px;
+    border-radius: 10px;
+  }
+  
   &:hover {
     background: 
       linear-gradient(135deg, 
@@ -235,6 +268,13 @@ const StartButton = styled(motion.button)`
     box-shadow: 
       0 12px 35px rgba(102, 126, 234, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      
+    @media (max-width: 480px) {
+      transform: translateY(-0.5px) scale(1.01);
+      box-shadow: 
+        0 6px 20px rgba(102, 126, 234, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
   }
 `;
 
@@ -244,6 +284,16 @@ const TaskbarItems = styled.div`
   gap: 8px;
   margin-left: 20px;
   flex: 1;
+  
+  @media (max-width: 768px) {
+    gap: 6px;
+    margin-left: 15px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 4px;
+    margin-left: 10px;
+  }
 `;
 
 const TaskbarItem = styled(motion.div)`
@@ -267,6 +317,20 @@ const TaskbarItem = styled(motion.div)`
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    border-radius: 7px;
+  }
+  
   ${props => props.active && `
     &::before {
       content: '';
@@ -278,6 +342,18 @@ const TaskbarItem = styled(motion.div)`
       height: 2px;
       background: linear-gradient(90deg, rgba(102, 126, 234, 0.8), rgba(139, 92, 246, 0.8));
       border-radius: 1px;
+      
+      @media (max-width: 768px) {
+        bottom: -6px;
+        width: 18px;
+        height: 1.5px;
+      }
+      
+      @media (max-width: 480px) {
+        bottom: -5px;
+        width: 16px;
+        height: 1px;
+      }
     }
   `}
   
@@ -288,6 +364,11 @@ const TaskbarItem = styled(motion.div)`
     };
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    
+    @media (max-width: 480px) {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    }
   }
 `;
 
@@ -297,6 +378,15 @@ const TaskbarTime = styled.div`
   font-weight: 500;
   text-align: right;
   line-height: 1.2;
+  
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 10px;
+    line-height: 1.1;
+  }
 `;
 
 const DesktopIcon = styled(motion.div)`
@@ -310,9 +400,25 @@ const DesktopIcon = styled(motion.div)`
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   
+  @media (max-width: 768px) {
+    gap: 4px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 3px;
+    padding: 4px;
+    border-radius: 10px;
+  }
+  
   &:hover {
     background: rgba(102, 126, 234, 0.15);
     transform: translateY(-4px) scale(1.05);
+    
+    @media (max-width: 480px) {
+      transform: translateY(-2px) scale(1.03);
+    }
     
     &::after {
       content: '';
@@ -328,6 +434,14 @@ const DesktopIcon = styled(motion.div)`
       border-radius: 20px;
       z-index: -1;
       opacity: 0.6;
+      
+      @media (max-width: 480px) {
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border-radius: 14px;
+      }
     }
   }
 `;
@@ -349,6 +463,20 @@ const IconContainer = styled(motion.div)`
   animation-delay: ${props => props.delay || '0s'};
   cursor: pointer;
   
+  @media (max-width: 768px) {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -362,6 +490,14 @@ const IconContainer = styled(motion.div)`
     z-index: -1;
     animation: ${iconGlow} 4s ease-in-out infinite;
     animation-delay: ${props => props.delay || '0s'};
+    
+    @media (max-width: 768px) {
+      border-radius: 11px;
+    }
+    
+    @media (max-width: 480px) {
+      border-radius: 9px;
+    }
   }
   
   &:hover {
@@ -369,6 +505,13 @@ const IconContainer = styled(motion.div)`
     box-shadow: 
       0 15px 40px rgba(102, 126, 234, 0.4),
       inset 0 2px 0 rgba(255, 255, 255, 0.3);
+      
+    @media (max-width: 480px) {
+      transform: scale(1.05) rotate(3deg);
+      box-shadow: 
+        0 8px 20px rgba(102, 126, 234, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
   }
 `;
 
@@ -408,6 +551,16 @@ const BootLogo = styled(motion.div)`
   margin-bottom: 20px;
   position: relative;
   
+  @media (max-width: 768px) {
+    font-size: 2.8rem;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+  
   &::after {
     content: '⚡';
     position: absolute;
@@ -415,6 +568,18 @@ const BootLogo = styled(motion.div)`
     right: -30px;
     font-size: 1.5rem;
     animation: ${iconFloat} 3s ease-in-out infinite;
+    
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      top: -8px;
+      right: -24px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1rem;
+      top: -6px;
+      right: -20px;
+    }
   }
 `;
 
@@ -424,6 +589,16 @@ const BootText = styled(motion.div)`
   font-weight: 500;
   margin-top: 10px;
   text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-top: 6px;
+  }
 `;
 
 const LoadingBar = styled(motion.div)`
@@ -467,6 +642,25 @@ const Window = styled(motion.div)`
   min-height: 250px;
   max-width: 500px;
   max-height: 400px;
+  
+  @media (max-width: 768px) {
+    min-width: 280px;
+    max-width: 90%;
+    min-height: 200px;
+    max-height: 70%;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    min-width: 250px;
+    max-width: 95%;
+    min-height: 180px;
+    max-height: 75%;
+    border-radius: 8px;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
 `;
 
 const WindowHeader = styled.div`
@@ -481,17 +675,43 @@ const WindowHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
+  
+  @media (max-width: 768px) {
+    height: 35px;
+    padding: 0 12px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 32px;
+    padding: 0 10px;
+  }
 `;
 
 const WindowTitle = styled.div`
   color: #e2e8f0;
   font-size: 14px;
   font-weight: 600;
+  
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 const WindowControls = styled.div`
   display: flex;
   gap: 8px;
+  
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 5px;
+  }
 `;
 
 const WindowControl = styled.div`
@@ -502,9 +722,23 @@ const WindowControl = styled.div`
   cursor: pointer;
   transition: all 0.2s ease;
   
+  @media (max-width: 768px) {
+    width: 10px;
+    height: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 9px;
+    height: 9px;
+  }
+  
   &:hover {
     transform: scale(1.2);
     opacity: 0.8;
+    
+    @media (max-width: 480px) {
+      transform: scale(1.1);
+    }
   }
 `;
 
@@ -516,8 +750,25 @@ const WindowContent = styled.div`
   height: calc(100% - 40px);
   overflow-y: auto;
   
+  @media (max-width: 768px) {
+    padding: 8px;
+    font-size: 10px;
+    height: calc(100% - 35px);
+  }
+  
+  @media (max-width: 480px) {
+    padding: 6px;
+    font-size: 9px;
+    height: calc(100% - 32px);
+    line-height: 1.3;
+  }
+  
   &::-webkit-scrollbar {
     width: 4px;
+    
+    @media (max-width: 480px) {
+      width: 3px;
+    }
   }
   
   &::-webkit-scrollbar-track {
@@ -540,6 +791,18 @@ const FileGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
   gap: 8px;
   margin-top: 8px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 6px;
+    margin-top: 6px;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+    gap: 4px;
+    margin-top: 4px;
+  }
 `;
 
 const FileItem = styled(motion.div)`
@@ -552,15 +815,39 @@ const FileItem = styled(motion.div)`
   cursor: pointer;
   transition: all 0.2s ease;
   
+  @media (max-width: 768px) {
+    gap: 3px;
+    padding: 4px;
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 2px;
+    padding: 3px;
+    border-radius: 4px;
+  }
+  
   &:hover {
     background: rgba(102, 126, 234, 0.1);
     transform: translateY(-2px);
+    
+    @media (max-width: 480px) {
+      transform: translateY(-1px);
+    }
   }
 `;
 
 const FileIcon = styled.div`
   font-size: 18px;
   color: ${props => props.color || '#60a5fa'};
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 const FileName = styled.div`
@@ -568,6 +855,14 @@ const FileName = styled.div`
   color: #cbd5e1;
   text-align: center;
   word-break: break-word;
+  
+  @media (max-width: 768px) {
+    font-size: 7px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 6px;
+  }
 `;
 
 const SettingsSection = styled.div`
@@ -667,6 +962,16 @@ const InfoRow = styled.div`
   margin-bottom: 4px;
   font-size: 10px;
   
+  @media (max-width: 768px) {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+  
   &:last-child {
     margin-bottom: 0;
   }
@@ -700,6 +1005,26 @@ const StartMenu = styled(motion.div)`
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   padding: 15px;
   z-index: 200;
+  
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 160px;
+    bottom: 50px;
+    left: 15px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+  
+  @media (max-width: 480px) {
+    width: calc(100% - 24px);
+    max-width: 180px;
+    height: 140px;
+    bottom: 42px;
+    left: 12px;
+    right: 12px;
+    padding: 10px;
+    border-radius: 12px;
+  }
 `;
 
 const StartMenuHeader = styled.div`
@@ -709,6 +1034,18 @@ const StartMenuHeader = styled.div`
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 12px;
+  
+  @media (max-width: 768px) {
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 6px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
 `;
 
 const UserAvatar = styled.div`
@@ -722,6 +1059,20 @@ const UserAvatar = styled.div`
   font-size: 16px;
   color: white;
   font-weight: 600;
+  
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 7px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
 `;
 
 const UserInfo = styled.div`
@@ -774,6 +1125,20 @@ const MenuAppIcon = styled.div`
   justify-content: center;
   font-size: 14px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  
+  @media (max-width: 768px) {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+    border-radius: 7px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
 `;
 
 
