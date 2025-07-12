@@ -15,7 +15,17 @@ const HeroSection = styled.section`
     radial-gradient(ellipse 80% 80% at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
     linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 30, 0.98) 100%);
   overflow: hidden;
-  padding-top: 40px;
+  padding: 100px 20px 40px 20px;
+  
+  @media (max-width: 768px) {
+    min-height: 100svh;
+    padding: 80px 16px 30px 16px;
+  }
+  
+  @media (max-width: 480px) {
+    min-height: 100svh;
+    padding: 70px 12px 20px 12px;
+  }
   
   &::before {
     content: '';
@@ -45,11 +55,28 @@ const HeroContainer = styled.div`
   position: relative;
   z-index: 1;
   
+  @media (max-width: 1200px) {
+    padding: 0 30px;
+    gap: 80px;
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  
+  @media (max-width: 968px) {
+    padding: 0 25px;
+    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+  }
+  
   @media (max-width: 768px) {
     padding: 0 20px;
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 50px;
     text-align: center;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 16px;
+    gap: 40px;
   }
 `;
 
@@ -77,7 +104,16 @@ const HeroContent = styled.div`
     66% { opacity: 0.5; transform: scale(1.0) rotate(240deg); }
   }
   
+  @media (max-width: 968px) {
+    text-align: left;
+  }
+  
   @media (max-width: 768px) {
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  @media (max-width: 480px) {
     text-align: center;
   }
 `;
@@ -88,6 +124,15 @@ const HeroVisual = styled.div`
   justify-content: center;
   position: relative;
   z-index: 2;
+  
+  @media (max-width: 768px) {
+    order: -1;
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 15px;
+  }
   
   &::before {
     content: '';
@@ -153,9 +198,9 @@ const AnnouncementText = styled(motion.p)`
 `;
 
 const HeroTitle = styled(motion.h1)`
-  font-size: clamp(4rem, 12vw, 11rem);
+  font-size: clamp(3rem, 10vw, 11rem);
   font-weight: 100;
-  line-height: 0.85;
+  line-height: 0.9;
   margin-bottom: 30px;
   letter-spacing: -0.05em;
   background: linear-gradient(135deg, #ffffff 0%, rgba(102, 126, 234, 0.9) 50%, rgba(118, 75, 162, 0.8) 100%);
@@ -163,11 +208,25 @@ const HeroTitle = styled(motion.h1)`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(2.5rem, 12vw, 6rem);
+    line-height: 0.95;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: clamp(2rem, 15vw, 4rem);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -0.03em;
+  }
 `;
 
 const ProductName = styled(motion.span)`
   display: block;
-  font-size: clamp(2.5rem, 8vw, 7rem);
+  font-size: clamp(2rem, 7vw, 7rem);
   font-weight: 200;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 70%, #a8edea 100%);
   -webkit-background-clip: text;
@@ -176,6 +235,17 @@ const ProductName = styled(motion.span)`
   letter-spacing: -0.03em;
   margin-top: 15px;
   position: relative;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(1.8rem, 10vw, 4rem);
+    margin-top: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: clamp(1.5rem, 12vw, 3rem);
+    margin-top: 10px;
+    letter-spacing: -0.02em;
+  }
   
   &::before {
     content: '';
@@ -194,6 +264,18 @@ const ProductName = styled(motion.span)`
     transform: translateY(-50%);
     opacity: 0.6;
     filter: blur(1px);
+    
+    @media (max-width: 768px) {
+      left: -20px;
+      width: calc(100% + 40px);
+      height: 2px;
+    }
+    
+    @media (max-width: 480px) {
+      left: -15px;
+      width: calc(100% + 30px);
+      height: 2px;
+    }
   }
   
   &::after {
@@ -206,6 +288,16 @@ const ProductName = styled(motion.span)`
     background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
     transform: translateY(-50%);
     opacity: 0.8;
+    
+    @media (max-width: 768px) {
+      left: -10px;
+      width: calc(100% + 20px);
+    }
+    
+    @media (max-width: 480px) {
+      left: -8px;
+      width: calc(100% + 16px);
+    }
   }
 `;
 
@@ -217,6 +309,27 @@ const HeroSubtitle = styled(motion.p)`
   max-width: 580px;
   line-height: 1.6;
   position: relative;
+  
+  @media (max-width: 968px) {
+    font-size: 20px;
+    max-width: 520px;
+    margin-bottom: 35px;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 18px;
+    max-width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 16px;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    padding: 0 10px;
+  }
   
   &::before {
     content: '';
@@ -242,12 +355,23 @@ const CTAContainer = styled(motion.div)`
   gap: 20px;
   margin-bottom: 20px;
   
+  @media (max-width: 968px) {
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  
   @media (max-width: 768px) {
     justify-content: center;
     flex-direction: column;
     align-items: center;
     gap: 15px;
     margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 12px;
+    margin-bottom: 12px;
   }
 `;
 
@@ -267,6 +391,24 @@ const PrimaryButton = styled(motion.div)`
   box-shadow: 
     0 10px 40px rgba(102, 126, 234, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  
+  @media (max-width: 968px) {
+    font-size: 15px;
+    border-radius: 18px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 280px;
+    font-size: 15px;
+    border-radius: 18px;
+  }
+  
+  @media (max-width: 480px) {
+    max-width: 250px;
+    font-size: 14px;
+    border-radius: 16px;
+  }
   
   &::before {
     content: '';
@@ -421,6 +563,24 @@ const ScrollIndicator = styled(motion.div)`
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.3s ease;
+  z-index: 10;
+  
+  @media (max-width: 768px) {
+    bottom: 80px;
+  }
+  
+  @media (max-width: 480px) {
+    bottom: 100px;
+    opacity: 0.6;
+  }
+  
+  @media (max-height: 800px) and (max-width: 768px) {
+    display: none;
+  }
+  
+  @media (max-height: 700px) {
+    display: none;
+  }
   
   &:hover {
     opacity: 1;
@@ -436,6 +596,17 @@ const ScrollText = styled.p`
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
+  
+  @media (max-width: 768px) {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 10px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
 `;
 
 const ScrollArrow = styled(motion.div)`
@@ -444,6 +615,15 @@ const ScrollArrow = styled(motion.div)`
   background: linear-gradient(180deg, rgba(102, 126, 234, 0.8) 0%, transparent 100%);
   margin: 0 auto;
   position: relative;
+  
+  @media (max-width: 768px) {
+    height: 35px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 30px;
+    opacity: 0.8;
+  }
   
   &::after {
     content: '';
@@ -456,6 +636,12 @@ const ScrollArrow = styled(motion.div)`
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 6px solid rgba(102, 126, 234, 0.8);
+    
+    @media (max-width: 480px) {
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 5px solid rgba(102, 126, 234, 0.8);
+    }
   }
 `;
 
