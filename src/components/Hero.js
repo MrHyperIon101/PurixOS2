@@ -12,7 +12,30 @@ const HeroSection = styled.section`
   position: relative;
   background: 
     radial-gradient(ellipse 120% 120% at 50% 120%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 80% at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+    radial-gradient(e  a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 20px 45px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    font-weight: inherit;
+    
+    @media (max-width: 768px) {
+      padding: 16px 32px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 14px 28px;
+    }
+  }
+};t 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
     linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 30, 0.98) 100%);
   overflow: hidden;
   padding: 100px 20px 40px 20px;
@@ -21,15 +44,19 @@ const HeroSection = styled.section`
   
   @media (max-width: 768px) {
     min-height: 100svh;
-    padding: 80px 16px 30px 16px;
+    padding: 90px 20px 40px 20px;
     overflow-x: hidden;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 100px;
   }
   
   @media (max-width: 480px) {
-    min-height: 100svh;
-    padding: 70px 12px 20px 12px;
+    min-height: calc(100svh - 20px);
+    padding: 80px 16px 30px 16px;
     overflow-x: hidden;
     width: 100vw;
+    box-sizing: border-box;
   }
   
   &::before {
@@ -75,19 +102,21 @@ const HeroContainer = styled.div`
   @media (max-width: 768px) {
     padding: 0 20px;
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 35px;
     text-align: center;
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
+    align-items: flex-start;
   }
   
   @media (max-width: 480px) {
     padding: 0 16px;
-    gap: 30px;
+    gap: 25px;
     max-width: 100%;
-    width: calc(100% - 32px);
+    width: 100%;
     margin: 0 auto;
+    min-height: auto;
   }
 `;
 
@@ -144,11 +173,16 @@ const HeroVisual = styled.div`
   
   @media (max-width: 768px) {
     order: -1;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    max-width: 100%;
+    transform: scale(0.9);
   }
   
   @media (max-width: 480px) {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    transform: scale(0.8);
+    max-height: 250px;
+    overflow: hidden;
   }
   
   &::before {
@@ -165,20 +199,36 @@ const HeroVisual = styled.div`
     animation: visualGlow 15s ease-in-out infinite reverse;
     pointer-events: none;
     z-index: -1;
+    
+    @media (max-width: 768px) {
+      width: 120%;
+      height: 120%;
+      opacity: 0.7;
+    }
+    
+    @media (max-width: 480px) {
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+    }
   }
   
   @keyframes visualGlow {
     0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(-50%) scale(1) rotate(0deg); }
     50% { opacity: 0.9; transform: translateX(-50%) translateY(-50%) scale(1.3) rotate(180deg); }
   }
-  
-  @media (max-width: 768px) {
-    order: -1;
-  }
 `;
 
 const ProductAnnouncement = styled(motion.div)`
   margin-bottom: 40px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 25px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const AnnouncementText = styled(motion.p)`
@@ -229,17 +279,18 @@ const HeroTitle = styled(motion.h1)`
   overflow: hidden;
   
   @media (max-width: 768px) {
-    font-size: clamp(2.5rem, 12vw, 5rem);
-    line-height: 0.95;
-    margin-bottom: 25px;
+    font-size: clamp(2.2rem, 14vw, 4.5rem);
+    line-height: 0.9;
+    margin-bottom: 20px;
     text-align: center;
     max-width: 100%;
+    letter-spacing: -0.04em;
   }
   
   @media (max-width: 480px) {
-    font-size: clamp(1.8rem, 12vw, 3.5rem);
-    line-height: 1;
-    margin-bottom: 20px;
+    font-size: clamp(2rem, 13vw, 3.8rem);
+    line-height: 0.85;
+    margin-bottom: 15px;
     letter-spacing: -0.03em;
     max-width: 100%;
     word-break: keep-all;
@@ -260,15 +311,16 @@ const ProductName = styled(motion.span)`
   max-width: 100%;
   
   @media (max-width: 768px) {
-    font-size: clamp(1.8rem, 10vw, 3.5rem);
-    margin-top: 12px;
+    font-size: clamp(1.6rem, 11vw, 3.2rem);
+    margin-top: 8px;
     max-width: 100%;
+    letter-spacing: -0.02em;
   }
   
   @media (max-width: 480px) {
-    font-size: clamp(1.4rem, 10vw, 2.5rem);
-    margin-top: 10px;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.4rem, 10vw, 2.8rem);
+    margin-top: 5px;
+    letter-spacing: -0.01em;
     max-width: 100%;
   }
   
@@ -291,15 +343,15 @@ const ProductName = styled(motion.span)`
     filter: blur(1px);
     
     @media (max-width: 768px) {
-      left: -20px;
-      width: calc(100% + 40px);
+      left: -15px;
+      width: calc(100% + 30px);
       height: 2px;
     }
     
     @media (max-width: 480px) {
-      left: -10px;
-      width: calc(100% + 20px);
-      height: 2px;
+      left: -8px;
+      width: calc(100% + 16px);
+      height: 1.5px;
     }
   }
   
@@ -315,13 +367,13 @@ const ProductName = styled(motion.span)`
     opacity: 0.8;
     
     @media (max-width: 768px) {
-      left: -10px;
-      width: calc(100% + 20px);
+      left: -8px;
+      width: calc(100% + 16px);
     }
     
     @media (max-width: 480px) {
-      left: -5px;
-      width: calc(100% + 10px);
+      left: -4px;
+      width: calc(100% + 8px);
     }
   }
 `;
@@ -342,20 +394,21 @@ const HeroSubtitle = styled(motion.p)`
   }
   
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 17px;
     max-width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     text-align: center;
-    line-height: 1.7;
+    line-height: 1.5;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 5px;
   }
   
   @media (max-width: 480px) {
-    font-size: 16px;
-    margin-bottom: 25px;
-    line-height: 1.8;
-    padding: 0 10px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    padding: 0 8px;
     max-width: 100%;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -392,14 +445,15 @@ const CTAContainer = styled(motion.div)`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     margin-bottom: 15px;
     width: 100%;
   }
   
   @media (max-width: 480px) {
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 12px;
+    width: 100%;
   }
 `;
 
@@ -427,15 +481,17 @@ const PrimaryButton = styled(motion.div)`
   
   @media (max-width: 768px) {
     width: 100%;
-    max-width: 280px;
+    max-width: 260px;
     font-size: 15px;
     border-radius: 18px;
+    min-height: 48px;
   }
   
   @media (max-width: 480px) {
-    max-width: 250px;
+    max-width: 240px;
     font-size: 14px;
     border-radius: 16px;
+    min-height: 44px;
   }
   
   &::before {
@@ -516,6 +572,21 @@ const SecondaryButton = styled(motion.div)`
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 260px;
+    font-size: 15px;
+    border-radius: 18px;
+    min-height: 48px;
+  }
+  
+  @media (max-width: 480px) {
+    max-width: 240px;
+    font-size: 14px;
+    border-radius: 16px;
+    min-height: 44px;
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -558,6 +629,10 @@ const SecondaryButton = styled(motion.div)`
     &::after {
       left: 100%;
     }
+    
+    @media (max-width: 768px) {
+      transform: translateY(-2px) scale(1.01);
+    }
   }
   
   &:active {
@@ -578,6 +653,14 @@ const SecondaryButton = styled(motion.div)`
     position: relative;
     z-index: 1;
     font-weight: inherit;
+    
+    @media (max-width: 768px) {
+      padding: 16px 32px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 14px 28px;
+    }
   }
 `;
 
