@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -123,6 +122,7 @@ const CommunityLinks = styled.div`
 const CommunityLink = styled(motion.a)`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -131,6 +131,7 @@ const CommunityLink = styled(motion.a)`
   text-decoration: none;
   color: #ffffff;
   cursor: pointer;
+  text-align: center;
 `;
 
 const LinkIcon = styled.div`
@@ -157,7 +158,9 @@ const LinkIcon = styled.div`
   }
 `;
 
-const LinkContent = styled.div``;
+const LinkContent = styled.div`
+  text-align: center;
+`;
 
 const LinkTitle = styled.h4`
   font-size: 18px;
@@ -282,13 +285,13 @@ const communityLinks = [
     type: 'instagram',
     title: 'Instagram',
     description: 'Follow us for updates and news',
-    href: '/support'
+    href: 'https://www.instagram.com/mrhyperion/'
   },
   {
     type: 'github',
     title: 'GitHub',
     description: 'Contribute to development',
-    href: '/support'
+    href: 'https://github.com/MrHyperIon101/PurixOS2'
   }
 ];
 
@@ -458,8 +461,9 @@ const Community = () => {
               {communityLinks.map((link, index) => (
                 <CommunityLink
                   key={link.type}
-                  as={Link}
-                  to={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variants={linkVariants}
                   initial="hidden"
                   animate={inView ? "visible" : "hidden"}
