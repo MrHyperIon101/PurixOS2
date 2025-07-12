@@ -29,7 +29,18 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px; /* Account for navbar height */
+    scroll-padding-top: 100px;
+    font-size: 16px;
+    
+    @media (max-width: 768px) {
+      scroll-padding-top: 80px;
+      font-size: 14px;
+    }
+    
+    @media (max-width: 480px) {
+      scroll-padding-top: 70px;
+      font-size: 13px;
+    }
   }
 
   body {
@@ -42,6 +53,10 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     position: relative;
+    
+    @media (max-width: 768px) {
+      line-height: 1.5;
+    }
   }
   
   body::before {
