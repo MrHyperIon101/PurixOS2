@@ -112,6 +112,14 @@ const GlobalStyle = createGlobalStyle`
 const AppContainer = styled.div`
   min-height: 100vh;
   background: #000000;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  
+  @media (max-width: 480px) {
+    overflow-x: hidden;
+    position: relative;
+  }
 `;
 
 const HomePage = () => (
