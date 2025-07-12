@@ -10,6 +10,14 @@ const FooterSection = styled.footer`
   position: relative;
   overflow: hidden;
   
+  @media (max-width: 768px) {
+    padding: 40px 0 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 30px 0 15px;
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -26,6 +34,10 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  
+  @media (max-width: 480px) {
+    padding: 0 16px;
+  }
 `;
 
 const FooterContent = styled.div`
@@ -36,11 +48,19 @@ const FooterContent = styled.div`
   
   @media (max-width: 1024px) {
     grid-template-columns: 2fr 1fr 1fr;
+    gap: 35px;
   }
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 25px;
+    margin-bottom: 25px;
   }
 `;
 
