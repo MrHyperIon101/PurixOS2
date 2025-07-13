@@ -168,7 +168,7 @@ const BackToHome = styled(motion.div)`
   
   @media (max-width: 768px) {
     left: 20px;
-    top: 100px;
+    top: 80px; /* Higher position on mobile for better visibility */
   }
 `;
 
