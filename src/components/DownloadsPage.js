@@ -13,6 +13,10 @@ const DownloadsPageSection = styled.section`
   position: relative;
   overflow: hidden;
   
+  @media (max-width: 768px) {
+    padding: 160px 0 80px; /* Extra top padding to account for back button */
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -925,7 +929,7 @@ const BackToHome = styled(motion.div)`
   
   @media (max-width: 768px) {
     left: 20px;
-    top: 100px;
+    top: 80px; /* Higher position on mobile for better visibility */
   }
 `;
 
@@ -961,10 +965,10 @@ const DownloadsPage = () => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [isDownloading, setIsDownloading] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [showComparison, setShowComparison] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState(null);
   const [downloadCount, setDownloadCount] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [viewMode, setViewMode] = useState('downloads'); // 'downloads' or 'comparison'
 
   // Debug logging
   console.log('Current activeEdition:', activeEdition);
@@ -985,7 +989,7 @@ const DownloadsPage = () => {
         'System: 64-bit system capability'
       ],
       downloadLink: 'https://drive.google.com/file/d/1CbhUV-R7kg7t-74S4iEFxccS9vcOKRbP/view?usp=sharing',
-      changelogLink: '/changelog/pro',
+      changelogLink: '/pro-changelog',
       changelog: [
         'Improved User Interface with modern design',
         'Updated Windows kernel with enhanced features',
@@ -1013,7 +1017,7 @@ const DownloadsPage = () => {
         'System: 32-bit or 64-bit system capability'
       ],
       downloadLink: 'https://drive.google.com/file/d/10Z-4XpNkeoKTmvKDbXjVBn3n_R9gYZqV/view?usp=drive_link',
-      changelogLink: '/changelog/core',
+      changelogLink: '/core-changelog',
       changelog: [
         'Year 2038 support for armhf architecture',
         'Updated Linux Kernel 6.8 with new features',
@@ -1067,7 +1071,15 @@ const DownloadsPage = () => {
   };
 
   const toggleComparison = () => {
-    setShowComparison(!showComparison);
+    setIsAnimating(true);
+    setTimeout(() => {
+      if (viewMode === 'comparison') {
+        setViewMode('downloads');
+      } else {
+        setViewMode('comparison');
+      }
+      setIsAnimating(false);
+    }, 300);
   };
 
   const installationSteps = [
@@ -1164,242 +1176,304 @@ const DownloadsPage = () => {
             onClick={toggleComparison}
             whileHover={{ scale: 1.05, rotate: 2 }}
             whileTap={{ scale: 0.95 }}
-            active={showComparison}
+            active={viewMode === 'comparison'}
           >
             📊 Compare Editions
           </ComparisonButton>
         </EditionSelector>
 
         <AnimatePresence mode="wait">
-          <DownloadContent
-            key={activeEdition}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-          >
-            <DownloadCard
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              onMouseEnter={() => setHoveredCard('main')}
-              onMouseLeave={() => setHoveredCard(null)}
-              whileHover={{ 
-                scale: 1.02,
-                y: -5,
-                transition: { duration: 0.3 }
-              }}
+          {viewMode === 'downloads' ? (
+            <DownloadContent
+              key={activeEdition}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
             >
-              <CardBadge>{currentEdition.badge}</CardBadge>
-              <CardTitle>{currentEdition.title}</CardTitle>
-              <CardDescription>{currentEdition.description}</CardDescription>
-              
-              <FileInfo>
-                <FileSize>Size: <span>{currentEdition.fileSize}</span></FileSize>
-                <ChecksumInfo>Verified</ChecksumInfo>
-              </FileInfo>
+              <DownloadCard
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                onMouseEnter={() => setHoveredCard('main')}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ 
+                  scale: 1.02,
+                  y: -5,
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <CardBadge>{currentEdition.badge}</CardBadge>
+                <CardTitle>{currentEdition.title}</CardTitle>
+                <CardDescription>{currentEdition.description}</CardDescription>
+                
+                <FileInfo>
+                  <FileSize>Size: <span>{currentEdition.fileSize}</span></FileSize>
+                  <ChecksumInfo>Verified</ChecksumInfo>
+                </FileInfo>
 
-              <DownloadStats>
-                <StatItem
-                  as={motion.div}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  animate={{ 
-                    scale: downloadCount > 0 ? [1, 1.05, 1] : 1,
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <StatValue>{parseInt(currentEdition.downloadCount) + downloadCount}</StatValue>
-                  <StatLabel>Downloads</StatLabel>
-                </StatItem>
-                <StatItem
-                  as={motion.div}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                >
-                  <StatValue>99.2%</StatValue>
-                  <StatLabel>Uptime</StatLabel>
-                </StatItem>
-                <StatItem
-                  as={motion.div}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                >
-                  <StatValue>{currentEdition.lastUpdated}</StatValue>
-                  <StatLabel>Last Updated</StatLabel>
-                </StatItem>
-              </DownloadStats>
-              
-              <SystemRequirements>
-                <RequirementsTitle>System Requirements</RequirementsTitle>
-                <RequirementsList>
-                  {currentEdition.requirements.map((req, index) => (
-                    <RequirementItem key={index}>{req}</RequirementItem>
-                  ))}
-                </RequirementsList>
-              </SystemRequirements>
+                <DownloadStats>
+                  <StatItem
+                    as={motion.div}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    animate={{ 
+                      scale: downloadCount > 0 ? [1, 1.05, 1] : 1,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    <StatValue>{parseInt(currentEdition.downloadCount) + downloadCount}</StatValue>
+                    <StatLabel>Downloads</StatLabel>
+                  </StatItem>
+                  <StatItem
+                    as={motion.div}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                  >
+                    <StatValue>99.2%</StatValue>
+                    <StatLabel>Uptime</StatLabel>
+                  </StatItem>
+                  <StatItem
+                    as={motion.div}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                  >
+                    <StatValue>{currentEdition.lastUpdated}</StatValue>
+                    <StatLabel>Last Updated</StatLabel>
+                  </StatItem>
+                </DownloadStats>
+                
+                <SystemRequirements>
+                  <RequirementsTitle>System Requirements</RequirementsTitle>
+                  <RequirementsList>
+                    {currentEdition.requirements.map((req, index) => (
+                      <RequirementItem key={index}>{req}</RequirementItem>
+                    ))}
+                  </RequirementsList>
+                </SystemRequirements>
 
-              <div style={{ position: 'relative', zIndex: 10 }}>
-                <DownloadButton
-                  as="button"
-                  onClick={() => handleDownload(currentEdition.downloadLink)}
-                  whileHover={{ scale: 1.05, y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                  disabled={isDownloading}
-                  animate={{
-                    background: isDownloading 
-                      ? `linear-gradient(135deg, #667eea ${downloadProgress}%, rgba(118, 75, 162, 0.3) ${downloadProgress}%)`
-                      : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span>
-                    {isDownloading ? (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-                      >
+                <div style={{ position: 'relative', zIndex: 10 }}>
+                  <DownloadButton
+                    as="button"
+                    onClick={() => handleDownload(currentEdition.downloadLink)}
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    whileTap={{ scale: 0.95 }}
+                    disabled={isDownloading}
+                    animate={{
+                      background: isDownloading 
+                        ? `linear-gradient(135deg, #667eea ${downloadProgress}%, rgba(118, 75, 162, 0.3) ${downloadProgress}%)`
+                        : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <span>
+                      {isDownloading ? (
                         <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          style={{ width: '16px', height: '16px', border: '2px solid rgba(255,255,255,0.3)', borderTop: '2px solid white', borderRadius: '50%' }}
-                        />
-                        Downloading... {downloadProgress}%
-                      </motion.div>
-                    ) : (
-                      <motion.span
-                        whileHover={{ scale: 1.05 }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-                      >
-                        ⬇️ Download Now
-                      </motion.span>
-                    )}
-                  </span>
-                </DownloadButton>
-                <SecondaryButton
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Link to={currentEdition.changelogLink}>View Changelog</Link>
-                </SecondaryButton>
-              </div>
-            </DownloadCard>
-
-            <DownloadCard
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              onMouseEnter={() => setHoveredCard('changelog')}
-              onMouseLeave={() => setHoveredCard(null)}
-              whileHover={{ 
-                scale: 1.02,
-                y: -5,
-                transition: { duration: 0.3 }
-              }}
-            >
-              <ChangelogSection>
-                <ChangelogTitle>Latest Updates</ChangelogTitle>
-                <ChangelogList>
-                  {currentEdition.changelog.slice(0, 6).map((item, index) => (
-                    <ChangelogItem 
-                      key={index}
-                      as={motion.li}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ 
-                        x: 10,
-                        color: 'rgba(255, 255, 255, 0.9)',
-                        transition: { duration: 0.2 }
-                      }}
-                      onClick={() => setSelectedFeature(selectedFeature === index ? null : index)}
-                      style={{ 
-                        cursor: 'pointer',
-                        background: selectedFeature === index ? 'rgba(102, 126, 234, 0.1)' : 'transparent',
-                        padding: selectedFeature === index ? '8px 12px' : '0',
-                        borderRadius: selectedFeature === index ? '8px' : '0',
-                        border: selectedFeature === index ? '1px solid rgba(102, 126, 234, 0.3)' : 'none'
-                      }}
-                    >
-                      {item}
-                      {selectedFeature === index && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          style={{ 
-                            marginTop: '8px', 
-                            fontSize: '0.8rem', 
-                            color: 'rgba(255, 255, 255, 0.6)',
-                            fontStyle: 'italic'
-                          }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                         >
-                          ✨ This feature enhances your experience significantly
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            style={{ width: '16px', height: '16px', border: '2px solid rgba(255,255,255,0.3)', borderTop: '2px solid white', borderRadius: '50%' }}
+                          />
+                          Downloading... {downloadProgress}%
                         </motion.div>
+                      ) : (
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                        >
+                          ⬇️ Download Now
+                        </motion.span>
                       )}
-                    </ChangelogItem>
-                  ))}
-                </ChangelogList>
-              </ChangelogSection>
-            </DownloadCard>
-          </DownloadContent>
-        </AnimatePresence>
+                    </span>
+                  </DownloadButton>
+                  <SecondaryButton
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Link to={currentEdition.changelogLink}>View Changelog</Link>
+                  </SecondaryButton>
+                </div>
+              </DownloadCard>
 
-        {showComparison && (
-          <ComparisonSection
-            as={motion.div}
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -50, scale: 0.9 }}
-            transition={{ duration: 0.5 }}
-          >
-            <ComparisonTitle>Edition Comparison</ComparisonTitle>
-            <ComparisonTable>
-              <ComparisonRow header>
-                <ComparisonCell>Feature</ComparisonCell>
-                <ComparisonCell>PurixOS Professional</ComparisonCell>
-                <ComparisonCell>PurixOS Core</ComparisonCell>
-              </ComparisonRow>
-              <ComparisonRow
-                as={motion.tr}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+              <DownloadCard
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                onMouseEnter={() => setHoveredCard('changelog')}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ 
+                  scale: 1.02,
+                  y: -5,
+                  transition: { duration: 0.3 }
+                }}
               >
-                <ComparisonCell>Base System</ComparisonCell>
-                <ComparisonCell>🪟 Windows-Based</ComparisonCell>
-                <ComparisonCell>🐧 Linux-Based</ComparisonCell>
-              </ComparisonRow>
-              <ComparisonRow
-                as={motion.tr}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                <ChangelogSection>
+                  <ChangelogTitle>Latest Updates</ChangelogTitle>
+                  <ChangelogList>
+                    {currentEdition.changelog.slice(0, 6).map((item, index) => (
+                      <ChangelogItem 
+                        key={index}
+                        as={motion.li}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ 
+                          x: 10,
+                          color: 'rgba(255, 255, 255, 0.9)',
+                          transition: { duration: 0.2 }
+                        }}
+                        onClick={() => setSelectedFeature(selectedFeature === index ? null : index)}
+                        style={{ 
+                          cursor: 'pointer',
+                          background: selectedFeature === index ? 'rgba(102, 126, 234, 0.1)' : 'transparent',
+                          padding: selectedFeature === index ? '8px 12px' : '0',
+                          borderRadius: selectedFeature === index ? '8px' : '0',
+                          border: selectedFeature === index ? '1px solid rgba(102, 126, 234, 0.3)' : 'none'
+                        }}
+                      >
+                        {item}
+                        {selectedFeature === index && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            style={{ 
+                              marginTop: '8px', 
+                              fontSize: '0.8rem', 
+                              color: 'rgba(255, 255, 255, 0.6)',
+                              fontStyle: 'italic'
+                            }}
+                          >
+                            ✨ This feature enhances your experience significantly
+                          </motion.div>
+                        )}
+                      </ChangelogItem>
+                    ))}
+                  </ChangelogList>
+                </ChangelogSection>
+              </DownloadCard>
+            </DownloadContent>
+          ) : (
+            <DownloadContent
+              key="comparison"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ComparisonSection
+                as={motion.div}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                style={{ width: '100%', margin: 0 }}
               >
-                <ComparisonCell>File Size</ComparisonCell>
-                <ComparisonCell>📦 4.2 GB</ComparisonCell>
-                <ComparisonCell>📦 2.8 GB</ComparisonCell>
-              </ComparisonRow>
-              <ComparisonRow
-                as={motion.tr}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
-              >
-                <ComparisonCell>RAM Required</ComparisonCell>
-                <ComparisonCell>🧠 4 GB</ComparisonCell>
-                <ComparisonCell>🧠 2 GB</ComparisonCell>
-              </ComparisonRow>
-              <ComparisonRow
-                as={motion.tr}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
-              >
-                <ComparisonCell>Target Audience</ComparisonCell>
-                <ComparisonCell>💼 Power Users</ComparisonCell>
-                <ComparisonCell>👨‍💻 Developers</ComparisonCell>
-              </ComparisonRow>
-              <ComparisonRow
-                as={motion.tr}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
-              >
-                <ComparisonCell>Gaming Support</ComparisonCell>
-                <ComparisonCell>🎮 Excellent</ComparisonCell>
-                <ComparisonCell>🎮 Good</ComparisonCell>
-              </ComparisonRow>
-            </ComparisonTable>
-          </ComparisonSection>
-        )}
+                <ComparisonTitle>Edition Comparison</ComparisonTitle>
+                <ComparisonTable>
+                  <ComparisonRow header>
+                    <ComparisonCell>Feature</ComparisonCell>
+                    <ComparisonCell>PurixOS Professional</ComparisonCell>
+                    <ComparisonCell>PurixOS Core</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>Base System</ComparisonCell>
+                    <ComparisonCell>🪟 Windows-Based</ComparisonCell>
+                    <ComparisonCell>🐧 Linux-Based</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>File Size</ComparisonCell>
+                    <ComparisonCell>📦 4.2 GB</ComparisonCell>
+                    <ComparisonCell>📦 2.8 GB</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>RAM Required</ComparisonCell>
+                    <ComparisonCell>🧠 4 GB</ComparisonCell>
+                    <ComparisonCell>🧠 2 GB</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>Target Audience</ComparisonCell>
+                    <ComparisonCell>💼 Power Users</ComparisonCell>
+                    <ComparisonCell>👨‍💻 Developers</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>Gaming Support</ComparisonCell>
+                    <ComparisonCell>🎮 Excellent</ComparisonCell>
+                    <ComparisonCell>🎮 Good</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>Software Compatibility</ComparisonCell>
+                    <ComparisonCell>✅ Windows Applications</ComparisonCell>
+                    <ComparisonCell>✅ Linux Applications</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>Performance</ComparisonCell>
+                    <ComparisonCell>🚀 High (Gaming & Productivity)</ComparisonCell>
+                    <ComparisonCell>⚡ Optimized (Development)</ComparisonCell>
+                  </ComparisonRow>
+                  <ComparisonRow
+                    as={motion.tr}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.02)' }}
+                  >
+                    <ComparisonCell>Security</ComparisonCell>
+                    <ComparisonCell>🛡️ Enhanced Windows Security</ComparisonCell>
+                    <ComparisonCell>🔒 Linux Kernel Security</ComparisonCell>
+                  </ComparisonRow>
+                </ComparisonTable>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  style={{ 
+                    marginTop: '30px', 
+                    textAlign: 'center',
+                    padding: '20px',
+                    background: 'rgba(102, 126, 234, 0.1)',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(102, 126, 234, 0.2)'
+                  }}
+                >
+                  <h4 style={{ 
+                    color: 'rgba(102, 126, 234, 0.9)', 
+                    marginBottom: '10px',
+                    fontSize: '1.2rem',
+                    fontWeight: '600'
+                  }}>
+                    Need Help Choosing?
+                  </h4>
+                  <p style={{ 
+                    color: 'rgba(255, 255, 255, 0.8)', 
+                    fontSize: '0.95rem',
+                    lineHeight: '1.5'
+                  }}>
+                    <strong>Choose Professional</strong> if you want familiar Windows experience with enhanced performance and privacy.<br/>
+                    <strong>Choose Core</strong> if you're a developer or prefer lightweight, Linux-based systems.
+                  </p>
+                </motion.div>
+              </ComparisonSection>
+            </DownloadContent>
+          )}
+        </AnimatePresence>
 
         <WorkspaceFeatureSection>
           <WorkspaceFeatureTitle
