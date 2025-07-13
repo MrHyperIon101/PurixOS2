@@ -12,30 +12,7 @@ const HeroSection = styled.section`
   position: relative;
   background: 
     radial-gradient(ellipse 120% 120% at 50% 120%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-    radial-gradient(e  a {
-    color: inherit;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 20px 45px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    font-weight: inherit;
-    
-    @media (max-width: 768px) {
-      padding: 16px 32px;
-    }
-    
-    @media (max-width: 480px) {
-      padding: 14px 28px;
-    }
-  }
-};t 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 80% at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
     linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 30, 0.98) 100%);
   overflow: hidden;
   padding: 100px 20px 40px 20px;
@@ -43,20 +20,26 @@ const HeroSection = styled.section`
   width: 100%;
   
   @media (max-width: 768px) {
-    min-height: 100svh;
-    padding: 90px 20px 40px 20px;
+    min-height: 100vh;
+    padding: 80px 15px 30px 15px;
     overflow-x: hidden;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-top: 100px;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    margin: 0;
   }
   
   @media (max-width: 480px) {
-    min-height: calc(100svh - 20px);
-    padding: 80px 16px 30px 16px;
+    min-height: 100vh;
+    padding: 70px 10px 25px 10px;
     overflow-x: hidden;
     width: 100vw;
+    max-width: 100vw;
     box-sizing: border-box;
+    margin: 0;
+    position: relative;
   }
   
   &::before {
@@ -100,23 +83,25 @@ const HeroContainer = styled.div`
   }
   
   @media (max-width: 768px) {
-    padding: 0 20px;
+    padding: 0 15px;
     grid-template-columns: 1fr;
-    gap: 35px;
+    gap: 30px;
     text-align: center;
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    align-items: flex-start;
+    align-items: center;
+    box-sizing: border-box;
   }
   
   @media (max-width: 480px) {
-    padding: 0 16px;
-    gap: 25px;
+    padding: 0 10px;
+    gap: 20px;
     max-width: 100%;
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
     min-height: auto;
+    box-sizing: border-box;
   }
 `;
 
@@ -154,6 +139,7 @@ const HeroContent = styled.div`
     text-align: center;
     max-width: 100%;
     width: 100%;
+    box-sizing: border-box;
   }
   
   @media (max-width: 480px) {
@@ -161,6 +147,7 @@ const HeroContent = styled.div`
     max-width: 100%;
     width: 100%;
     overflow: hidden;
+    box-sizing: border-box;
   }
 `;
 
@@ -175,14 +162,18 @@ const HeroVisual = styled.div`
     order: -1;
     margin-bottom: 15px;
     max-width: 100%;
-    transform: scale(0.9);
+    transform: scale(0.85);
+    width: 100%;
+    box-sizing: border-box;
   }
   
   @media (max-width: 480px) {
     margin-bottom: 10px;
-    transform: scale(0.8);
-    max-height: 250px;
+    transform: scale(0.75);
+    max-height: 220px;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   &::before {
@@ -223,11 +214,11 @@ const ProductAnnouncement = styled(motion.div)`
   margin-bottom: 40px;
   
   @media (max-width: 768px) {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
   
   @media (max-width: 480px) {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 `;
 
@@ -279,21 +270,23 @@ const HeroTitle = styled(motion.h1)`
   overflow: hidden;
   
   @media (max-width: 768px) {
-    font-size: clamp(2.2rem, 14vw, 4.5rem);
+    font-size: clamp(2rem, 12vw, 3.5rem);
     line-height: 0.9;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
     max-width: 100%;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
+    word-wrap: break-word;
   }
   
   @media (max-width: 480px) {
-    font-size: clamp(2rem, 13vw, 3.8rem);
+    font-size: clamp(1.8rem, 11vw, 3rem);
     line-height: 0.85;
-    margin-bottom: 15px;
-    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
     max-width: 100%;
     word-break: keep-all;
+    overflow-wrap: break-word;
   }
 `;
 
@@ -311,15 +304,15 @@ const ProductName = styled(motion.span)`
   max-width: 100%;
   
   @media (max-width: 768px) {
-    font-size: clamp(1.6rem, 11vw, 3.2rem);
-    margin-top: 8px;
+    font-size: clamp(1.4rem, 9vw, 2.5rem);
+    margin-top: 5px;
     max-width: 100%;
     letter-spacing: -0.02em;
   }
   
   @media (max-width: 480px) {
-    font-size: clamp(1.4rem, 10vw, 2.8rem);
-    margin-top: 5px;
+    font-size: clamp(1.2rem, 8vw, 2.2rem);
+    margin-top: 3px;
     letter-spacing: -0.01em;
     max-width: 100%;
   }
@@ -394,24 +387,26 @@ const HeroSubtitle = styled(motion.p)`
   }
   
   @media (max-width: 768px) {
-    font-size: 17px;
+    font-size: 16px;
     max-width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     text-align: center;
     line-height: 1.5;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 5px;
+    padding: 0 10px;
+    box-sizing: border-box;
   }
   
   @media (max-width: 480px) {
-    font-size: 15px;
-    margin-bottom: 20px;
-    line-height: 1.6;
-    padding: 0 8px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    padding: 0 5px;
     max-width: 100%;
     word-break: break-word;
     overflow-wrap: break-word;
+    box-sizing: border-box;
   }
   
   &::before {
@@ -448,12 +443,16 @@ const CTAContainer = styled(motion.div)`
     gap: 12px;
     margin-bottom: 15px;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   @media (max-width: 480px) {
     gap: 10px;
     margin-bottom: 12px;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 `;
 
@@ -481,17 +480,19 @@ const PrimaryButton = styled(motion.div)`
   
   @media (max-width: 768px) {
     width: 100%;
-    max-width: 260px;
+    max-width: 280px;
     font-size: 15px;
     border-radius: 18px;
-    min-height: 48px;
+    min-height: 50px;
+    box-sizing: border-box;
   }
   
   @media (max-width: 480px) {
-    max-width: 240px;
+    max-width: 260px;
     font-size: 14px;
     border-radius: 16px;
-    min-height: 44px;
+    min-height: 48px;
+    box-sizing: border-box;
   }
   
   &::before {
@@ -574,17 +575,19 @@ const SecondaryButton = styled(motion.div)`
   
   @media (max-width: 768px) {
     width: 100%;
-    max-width: 260px;
+    max-width: 280px;
     font-size: 15px;
     border-radius: 18px;
-    min-height: 48px;
+    min-height: 50px;
+    box-sizing: border-box;
   }
   
   @media (max-width: 480px) {
-    max-width: 240px;
+    max-width: 260px;
     font-size: 14px;
     border-radius: 16px;
-    min-height: 44px;
+    min-height: 48px;
+    box-sizing: border-box;
   }
   
   &::before {
