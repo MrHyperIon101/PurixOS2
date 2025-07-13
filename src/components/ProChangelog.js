@@ -9,6 +9,10 @@ const ChangelogSection = styled.section`
   padding: 120px 0 80px;
   position: relative;
   overflow: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 160px 0 80px; /* Extra top padding to account for back button */
+  }
 `;
 
 const ChangelogContainer = styled.div`
@@ -140,7 +144,7 @@ const BackToHome = styled(motion.div)`
   
   @media (max-width: 768px) {
     left: 20px;
-    top: 100px;
+    top: 80px; /* Higher position on mobile for better visibility */
   }
 `;
 
