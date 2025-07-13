@@ -159,21 +159,11 @@ const HeroVisual = styled.div`
   z-index: 2;
   
   @media (max-width: 768px) {
-    order: -1;
-    margin-bottom: 15px;
-    max-width: 100%;
-    transform: scale(0.85);
-    width: 100%;
-    box-sizing: border-box;
+    display: none;
   }
   
   @media (max-width: 480px) {
-    margin-bottom: 10px;
-    transform: scale(0.75);
-    max-height: 220px;
-    overflow: hidden;
-    width: 100%;
-    box-sizing: border-box;
+    display: none;
   }
   
   &::before {
