@@ -8,7 +8,6 @@ import Showcase from './components/Showcase';
 import Download from './components/Download';
 import Community from './components/Community';
 import Footer from './components/Footer';
-import CursorTrail from './components/CursorTrail';
 import DownloadsPage from './components/DownloadsPage';
 import ProChangelog from './components/ProChangelog';
 import CoreChangelog from './components/CoreChangelog';
@@ -135,7 +134,6 @@ const HomePage = () => (
 function App() {
   return (
     <>
-      <CursorTrail />
       <Router>
         <ScrollToTop />
         <GlobalStyle />
